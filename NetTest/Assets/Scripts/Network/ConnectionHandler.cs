@@ -46,12 +46,12 @@ public class ConnectionHandler : MonoBehaviour {
 
 	void OnConnectedToServer()
 	{
-		SpawnPlayer(Network.player);
+		//SpawnPlayer(Network.player);
 	}
 	
 	void OnPlayerConnected(NetworkPlayer player)
 	{
-		//SpawnPlayer(player);
+		SpawnPlayer(player);
 		Debug.Log(player.ToString() + " Connected to the server From: " + player.externalIP + " " + player.externalPort + " " + player.ipAddress + " " + player.port);
 	}
 	
@@ -61,12 +61,12 @@ public class ConnectionHandler : MonoBehaviour {
 		int playerNumber = System.Convert.ToInt32(tempPlayerString);
 		
 		Transform newPlayerTransform = (Transform)Network.Instantiate(playerPrefab_Net, transform.position, transform.rotation, playerNumber);
-		newPlayerTransform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
-		//playerScripts.Add(newPlayerTransform.GetComponent("AuthPlayerController"));
+		//newPlayerTransform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+		playerScripts.Add(newPlayerTransform.GetComponent("NetworkedPlayerControls"));
 		
 		
-		//NetworkView theNetworkView = newPlayerTransform.networkView;
-		//theNetworkView.RPC("SetPlayer", RPCMode.AllBuffered, player);
+		NetworkView theNetworkView = newPlayerTransform.networkView;
+		theNetworkView.RPC("SetPlayer", RPCMode.AllBuffered, player);
 		
 		//tell the client to create the model for this player
 		//theNetworkView.RPC("CreateModel", RPCMode.OthersBuffered, player); //networkplayer
