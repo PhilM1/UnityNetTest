@@ -26,6 +26,17 @@ public class ConnectionHandler : MonoBehaviour {
 			Network.InitializeServer(GlobalGameState.Instance.maxPlayers, GlobalGameState.Instance.port, !Network.HavePublicAddress());
 		}
 	}
+
+	//For Displaying Ping.
+	void OnGUI() 
+	{
+		GUILayout.Label("Player ping values");
+		for (int i = 0; i < Network.connections.Length; i++) {
+			GUILayout.Label("Player " + 
+			                Network.connections[i] + " - " + 
+			                Network.GetAveragePing(Network.connections[i]) + " ms");
+		}
+	}
 	
 	void OnFailedToConnect()
 	{

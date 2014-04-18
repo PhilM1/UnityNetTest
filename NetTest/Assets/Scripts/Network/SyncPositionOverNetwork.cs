@@ -21,6 +21,8 @@ public class SyncPositionOverNetwork : MonoBehaviour {
 		{
 			InterpolateMovement();
 		}
+
+
 	
 	}
 
@@ -28,6 +30,7 @@ public class SyncPositionOverNetwork : MonoBehaviour {
 	{
 		lastSyncTime = Time.time;
 	}
+
 
 	//Sends or Recieves Serialized variables over the network.
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
